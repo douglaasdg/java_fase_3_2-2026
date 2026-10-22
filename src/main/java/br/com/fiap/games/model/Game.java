@@ -1,13 +1,11 @@
 package br.com.fiap.games.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "tbl_games")
 public class Game {
-
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
