@@ -14,4 +14,8 @@ public class GameDao {
     public void salvar(Game game){
         em.persist(game);
     }
+
+    public void atualizar(Game game){
+        em.merge(game);
+    }
 }
