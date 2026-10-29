@@ -1,6 +1,8 @@
 package br.com.fiap.games;
 
+import br.com.fiap.games.dao.GameDao;
 import br.com.fiap.games.model.Game;
+import br.com.fiap.games.utils.Conexao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -12,18 +14,17 @@ public class Main {
     public static void main(String[] args) {
 
         Game game1 = new Game();
-        game1.setTitulo("Megaman 1");
-        game1.setCategoria("Plataforma");
-        game1.setDataLancamento(LocalDate.of(1987,12,1));
-        game1.setFinalizado(true);
-        game1.setProdutora("Capcom");
-        game1.setValor(128.00);
+        game1.setTitulo("Batletoads");
+        game1.setCategoria("Luta");
+        game1.setDataLancamento(LocalDate.of(1992,8,1));
+        game1.setFinalizado(false);
+        game1.setProdutora("Tradewest");
+        game1.setValor(99.89);
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("games");
-        EntityManager em = emf.createEntityManager();
-
+        EntityManager em = Conexao.getEntityManager();
+        GameDao gameDao = new GameDao(em);
         em.getTransaction().begin();
-        em.persist(game1);
+        gameDao.salvar(game1);
         em.getTransaction().commit();
         em.close();
     }
